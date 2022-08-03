@@ -1,0 +1,30 @@
+
+<div class="lateralNavbar compress-navbar" #lateralNavbar >
+    <div class="bar-icon" (click)="compressNavbar()">
+        <fa-icon [icon]="faClose" class=""></fa-icon>
+    </div>
+
+    <div class="list-icons">
+        <ul>
+            <li *ngFor="let item of links" [routerLink]="item.url" (click)="compressNavbar()">
+                <fa-icon [icon]="item.icon" class=""></fa-icon>
+                <span>{{ item.name }}</span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="loggout">
+        <fa-icon [icon]="powerOff" class=""></fa-icon>
+        <span>Cerrar Sesión</span>
+    </div>
+</div>
+
+<div class="navbar-fullscreen d-none" #navbarFullscreen (click)="compressNavbar()">
+
+</div>
+
+<div class="head-nav">
+    <div class="bar-icon" >
+        <fa-icon [icon]="barChart"(click)="compressNavbar()" class=""></fa-icon>
+    </div>
+</div>

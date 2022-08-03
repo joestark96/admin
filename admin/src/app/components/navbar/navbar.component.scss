@@ -1,0 +1,115 @@
+.head-nav{
+    height: 50px;
+    position: relative;
+    width: 100vw;
+    box-shadow: -1px 0px 10px 0px black;
+    z-index: 97;
+    fa-icon{
+        display: inline-block;
+        margin: 5px;
+        font-size: 1.5em;
+        margin-left: 10px;
+        cursor: pointer;
+
+        &:hover{
+            color: var(--light-green);
+            transition: 0.1s ease-in;
+        }
+    }
+}
+.lateralNavbar {
+    background-color: rgb(77, 77, 77);
+    height: 100vh;
+    min-width: 150px;
+    position: absolute;
+    display: inline-block;
+    top: 0;
+    border-radius: 0px 5px 5px 0px;
+    padding: 10px;
+    z-index: 99;
+    transition: 0.5 ease-out;
+    animation: compress-nav-left 1s;
+
+    fa-icon:hover,
+    li:hover {
+        color: rgb(200, 255, 0);
+        cursor: pointer;
+    }
+
+    .bar-icon {
+        width: 100%;
+
+        fa-icon {
+            font-size: 1.5em;
+            color: #fff;
+
+            &:hover {
+                color: rgb(200, 255, 0);
+            }
+        }
+    }
+
+    .list-icons {
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            margin-top: 25px;
+            color: #fff;
+
+            li {
+                padding: 5px 0;
+
+                &:hover {
+                    background-color: rgb(109, 109, 109);
+                }
+            }
+
+            fa-icon {
+                margin: 5px;
+            }
+        }
+    }
+
+    .loggout {
+        margin-bottom: 15px;
+        text-align: center;
+        color: #fff;
+        cursor: pointer;
+        bottom: 0;
+        position: absolute;
+
+        fa-icon {
+            margin: 5px;
+        }
+
+        &:hover {
+            color: rgb(226, 93, 93);
+            transition: 0.1s ease-in-out;
+        }
+    }
+}
+
+.compress-navbar {
+    transition: 0.5s ease-in-out;
+    left: -200px !important;
+    animation-name:  compress-nav-left;
+    animation-duration: 1s;
+}
+
+.navbar-fullscreen{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.322);
+    position: fixed;
+    z-index: 98;
+}
+
+@keyframes compress-nav-left {
+    0%{
+        left: 0;
+    }
+    100%{
+        left: -200px !important;
+    }
+}

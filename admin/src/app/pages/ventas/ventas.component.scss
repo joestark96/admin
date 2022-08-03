@@ -1,0 +1,28 @@
+.table-products{
+    button{
+        font-size: 1em;
+        margin: 1px;
+        cursor: pointer;
+
+        &:hover{
+        }
+    }
+}
+
+.ventas-cards{
+    .card{
+        box-shadow: 5px 5px 5px 0px #c3c3c3;
+    }
+}
+
+.total-pill{
+    position: absolute;
+    bottom: 1em;
+    left: 1em;
+    background-color: #0e5699;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1.25em;
+    border-radius: 20px;
+    z-index: 95;
+}

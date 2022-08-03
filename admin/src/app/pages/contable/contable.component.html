@@ -1,0 +1,126 @@
+<main>
+    <div class="container">
+        <h2 class="text-center m-4">Contabilidad</h2>
+
+        <div class="date-input">
+            <div class="input-group mb-3">
+                <input type="month" class="form-control" placeholder="Username" aria-label="Username"
+                    aria-describedby="calendar" [(ngModel)]="date" [ngModelOptions]="{ 'standalone' : true}" (change)="getData()">
+            </div>
+        </div>
+
+        <div class="bills">
+
+            <div class="accordion accordion-flush" id="accordionFlushBills">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                            Gastos
+                        </button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                        data-bs-parent="#accordionFlushBills">
+                        <ul class="list-group">
+                            <li class="list-group-item list-group-item-action list-group-item-danger d-flex justify-content-between align-items-start"
+                                *ngFor="let bill of bills">
+                                <div class="ms-2 me-auto">
+                                    <div>
+                                        <strong>Fecha: </strong>
+                                        {{ dateService.formatDate(bill.created_at) }}
+                                    </div>
+                                    <div class="fw-bold">{{ bill.concept}}</div>
+                                    <div *ngIf="bill.notes != null && bill.notes != '' && bill.notes != 'null'">
+                                        <strong>Notas: </strong>
+                                        {{ bill.notes }}
+                                    </div>
+                                </div>
+                                <h5>
+                                    <span class="badge bg-danger rounded-pill">Total: $ {{ bill.amount }}</span>
+                                </h5>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="alert alert-danger" role="alert">
+                <strong>Total: </strong>$ {{ billsTotal }}
+            </div>
+        </div>
+
+        <div class="ventas">
+
+            <div class="accordion accordion-flush" id="accordionFlushVentas">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseVentas" aria-expanded="false"
+                            aria-controls="flush-collapseVentas">
+                            Ventas
+                        </button>
+                    </h2>
+                    <div id="flush-collapseVentas" class="accordion-collapse collapse"
+                        aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushVentas">
+                        <ul class="list-group">
+                            <li class="list-group-item list-group-item-action list-group-item-success d-flex justify-content-between align-items-start"
+                                *ngFor="let venta of ventas">
+                                <div class="ms-2 me-auto">
+                                    <div>
+                                        <strong>Folio: </strong>
+                                        {{ venta.folio + 1}}
+                                    </div>
+                                    <div>
+                                        <strong>Fecha: </strong>
+                                        {{ dateService.formatDate(venta.created_at) }}
+                                    </div>
+                                    <div *ngIf="venta.name != null && venta.name != ''">
+                                        <strong>Cliente: </strong> {{ venta.name}}
+                                    </div>
+
+                                    <div>
+                                        <strong>Subtotal: </strong>${{ venta.subtotal }}
+                                    </div>
+                                    <div>
+                                        <strong>IVA: </strong>${{ venta.iva }}
+                                    </div>
+
+                                    <div *ngIf="venta.notes != null && venta.notes != '' && venta.notes != 'null'">
+                                        <strong>Notas: </strong>
+                                        {{ venta.notes }}
+                                    </div>
+                                </div>
+                                <h5>
+                                    <span class="badge bg-success rounded-pill">Total: $ {{ venta.total }}</span>
+                                </h5>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="alert alert-success" role="alert">
+                <div>
+                    Subtotal: $ {{ ventasSubtotal }}
+                </div>
+
+                <div>
+                    <strong>Total: </strong> $ {{ ventasTotal }}
+                </div>
+            </div>
+        </div>
+
+        <div class="contable">
+            <div class="alert alert-danger" role="alert" *ngIf="contable < 0">
+                Ingreso: $ {{ contable }}
+            </div>
+
+            <div class="alert alert-success" role="alert" *ngIf="contable >= 0">
+                Ingreso: $ {{ contable }}
+            </div>
+        </div>
+    </div>
+
+</main>

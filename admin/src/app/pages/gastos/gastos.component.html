@@ -1,0 +1,91 @@
+<main>
+    <div class="container">
+        <h2 class="text-center m-4">Gastos</h2>
+        <div class="filter-input">
+            <input class="form-control" type="text" placeholder="Buscar" [(ngModel)]="productoFilter" [ngModelOptions]="{ 'standalone' : true}" (keyup)="search()">
+        </div>
+    </div>
+
+    <div class="product-table">
+        <div class="create-product my-4">
+            <button class="btn btn-success end-0 mx-4" [routerLink]="'/gastos/crear'">Crear Gasto</button>
+        </div>
+
+        <div class="offset">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <select class="form-select" aria-label="Numero a mostrar" (change)="changeLimit($event)">
+                            <option value="5">5</option>
+                            <option selected value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <select class="form-select" aria-label="Ordenar" (change)="changeSort($event)">
+                            <option value="ASC">Ascendente</option>
+                            <option selected value="DESC">Descendente</option>
+                        </select>
+                    </div>
+
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <input type="month" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="calendar" [(ngModel)]="query.date" [ngModelOptions]="{ 'standalone' : true}" (change)="changeMonth()">
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="table-products m-4 text-center">
+            <table class="table table-hover table-bordered ">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Concepto</th>
+                        <th>Monto</th>
+                        <th>Notas</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody #tBody>
+                    <tr *ngFor="let element of  productosFilter">
+                        <td>{{ dateFormat(element.created_at) }}</td>
+                        <td>{{element.concept}}</td>
+                        <td>{{element.amount}}</td>
+                        <td>{{element.notes}}</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-primary m-2" (click)="editBill(element.id)">
+                                <fa-icon [icon]="faEdit" ></fa-icon>
+                            </button>
+
+                            <button type="button" class="btn btn-outline-danger m-2" (click)="deleteBill(element)">
+                                <fa-icon [icon]="faX" ></fa-icon>
+                            </button>
+                        </td>
+                      </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="paginator">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item" *ngIf="query.offset > 0" (click)="startPage()">
+                        <a class="page-link">Inicio</a>
+                    </li>
+                    <li class="page-item" *ngIf="query.offset > 0" (click)="prevPage()">
+                        <a class="page-link">Anterior</a>
+                    </li>
+                    <li class="page-item" *ngIf="query.offset < query.count - query.limit" (click)="nextPage()">
+                        <a class="page-link">Siguiente</a>
+                    </li>
+                    <li class="page-item" *ngIf="query.offset < query.count - query.limit" (click)="endPage()">
+                        <a class="page-link">Final</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</main>

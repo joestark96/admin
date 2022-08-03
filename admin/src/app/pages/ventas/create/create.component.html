@@ -1,0 +1,112 @@
+<fa-icon [icon]="faArrowCircleLeft" class="btn-green my-2 floating" [routerLink]="'/ventas'"></fa-icon>
+
+<main>
+
+    <form [formGroup]="ventaForm">
+        <div class="content-custom">
+            
+            <div class="venta-box">
+                <div class="row my-2">
+                    <div class="input-group mb-3">
+                        <span>No. Orden: {{ venta.folio + 1 }}</span>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Nombre del cliente" formControlName="name">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Buscar Producto" [(ngModel)]="productoFilter" [ngModelOptions]="{ 'standalone' : true}">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <select class="form-select"  [(ngModel)]="categoriaFilter" [ngModelOptions]="{ 'standalone' : true}">
+                            <option value="">Todos</option>
+                            <option *ngFor="let categoria of categorias" [value]="categoria">{{categoria}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 venta-productos" #productos>
+                        <div class="cart-products">
+                            <div class="no-cart text-center text-muted" *ngIf="productosFilter.length <= 0">
+                                <h2 class="h4 m-3">No hay productos</h2>
+                            </div>
+    
+                            <div *ngFor="let producto of productosFilter" class="card product-card clickCard"
+                                [ngStyle]="{ 'background-image': producto.image != null ? getURL(producto) : '' }"
+                                (click)="addProducto(producto)">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{producto.name}}</h5>
+                                    <p class="card-text">${{producto.price}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="my-4 comment-textarea">
+                            <textarea formControlName="notes" placeholder="Comentarios"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4">
+                        <div class="cantidades ">
+                            <div *ngIf="cart.length > 0" class="carrito">
+                                <div *ngFor="let producto of cart ; let index = index" class="carrito-producto">
+                                    <div class="row text-center">
+                                        <div class="col-md-5 d-flex text-center justify-content-center align-items-center">
+                                            {{producto.name}}
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="cart-producto-buttons">
+                                                <button type="button" class="cart-producto-button" (click)="minusCantidad(index)">-</button>
+                                                <span>{{producto.quantity}}</span>
+                                                <button type="button" class="cart-producto-button" (click)="addCantidad(index)">+</button>
+                                                <fa-icon [icon]="faTrash" class="cart-producto-button" (click)="borrarProducto(producto)"></fa-icon>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="no-cart text-center text-muted" *ngIf="cart.length <= 0">
+                                <h2 class="h4 m-3">No hay productos</h2>
+                            </div>
+                        </div>
+
+                        <div class="total">
+                            <div class="row">
+                                <div class="col-md-6"><span class="fw-bold">Subtotal</span></div>
+                                <div class="col-md-6">${{ subtotal }}</div>
+                            </div>
+                        </div>
+
+                        
+                        <div class="total">
+                            <div class="row">
+                                <div class="col-md-6"><span class="fw-bold">IVA(16%)</span></div>
+                                <div class="col-md-6">${{ iva }}</div>
+                            </div>
+                        </div>
+
+                        <div class="total">
+                            <div class="row">
+                                <div class="col-md-6"><span class="fw-bold">Total</span></div>
+                                <div class="col-md-6">${{ total }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form> 
+</main>
+
+<div class="floating-buttons">
+    <button class="btn btn-primary" type="button" (click)="createVenta()">
+        <fa-icon [icon]="faSave"></fa-icon>
+        <span>Guardar</span>
+    </button>
+    <button class="btn btn-success" type="button" (click)="closeVenta(venta)">
+        <fa-icon [icon]="faCheck"></fa-icon>
+        <span>Cerrar</span>
+    </button>
+</div>

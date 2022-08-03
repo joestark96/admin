@@ -1,0 +1,22 @@
+<main>
+    <div class="container">
+        <fa-icon [icon]="faArrowCircleLeft" class="btn-green my-2" [routerLink]="'/gastos'"></fa-icon>
+
+        <form class="form-control" [formGroup]="billForm" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="concept">Concepto</label>
+                <input type="text" class="form-control" id="concept" formControlName="concept" name="concept">
+            </div>
+            <div class="form-group">
+                <label for="amount">Monto</label>
+                <input type="number" class="form-control" id="amount" formControlName="amount" name="amount">
+            </div>
+            <div class="form-group">
+                <label for="notes">Nota</label>
+                <textarea class="form-control" id="notes" formControlName="notes" name="notes"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary my-3" (click)="saveProduct()">Guardar</button>
+        </form>
+    </div>
+</main>
