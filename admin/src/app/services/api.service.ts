@@ -11,8 +11,8 @@ export class ApiService {
     private http: HttpClient
   ) { }
 
-  private apiUrl = 'http://localhost:3000/api/';
-  // private apiUrl = 'http://api.canelaymiel.tk/api/';
+  // private apiUrl = 'http://localhost:3000/api/';
+  private apiUrl = 'https://api.canelaymiel.tk/api/';
   
   public welcome() {
     return this.http.get(this.apiUrl);

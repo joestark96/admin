@@ -111,7 +111,7 @@ export class CreateComponent implements OnInit {
     formData.append('files.imagen', this.file.archivo);
 
     if(this.id != undefined) {
-      this.api.actualizarRecurso('products/', this.id, formData).subscribe(
+      this.api.actualizarRecurso('products', this.id, formData).subscribe(
         (res: any) => {
           Swal.fire({
             title: 'Actualizado',
